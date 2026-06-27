@@ -22,7 +22,7 @@
 body{
   font-family:Tajawal,sans-serif;background:var(--royal-deep);color:var(--text);
   min-height:100vh;display:flex;justify-content:center;
-  padding:20px 16px 40px;overflow-x:hidden;position:relative
+  padding:20px 16px 40px;overflow-x:hidden;position:relative;
 }
 
 /* ── Fond ── */
@@ -63,7 +63,6 @@ body{
   padding:20px 0 10px
 }
 
-/* Cercle lumineux autour du visage */
 .imen-halo{
   position:relative;width:200px;height:200px;
   display:flex;align-items:center;justify-content:center
@@ -81,17 +80,14 @@ body{
 }
 @keyframes pulseGold{0%,100%{box-shadow:0 0 25px 8px var(--gold-glow),0 0 60px 15px rgba(255,200,0,0.3)}50%{box-shadow:0 0 45px 16px rgba(255,215,0,0.85),0 0 100px 30px rgba(255,200,0,0.45)}}
 
-/* SVG du visage */
 #imen-svg{width:180px;height:180px;border-radius:50%;overflow:visible}
 
-/* Label d'état */
 .imen-label{
   font-family:Amiri,serif;font-size:20px;color:var(--gold-shine);
   text-shadow:0 0 14px rgba(255,215,0,0.8);letter-spacing:1px;
   text-align:center;min-height:32px;transition:opacity .3s
 }
 
-/* Ondes sonores (visibles quand elle parle) */
 .sound-waves{
   display:flex;align-items:center;gap:5px;height:36px;
   opacity:0;transition:opacity .4s
@@ -109,21 +105,6 @@ body{
 .sound-waves span:nth-child(6){height:28px;animation-delay:.15s}
 .sound-waves span:nth-child(7){height:18px;animation-delay:.25s}
 @keyframes wave{0%,100%{transform:scaleY(1);opacity:.6}50%{transform:scaleY(1.7);opacity:1}}
-
-/* Points d'écoute (visibles quand elle écoute) */
-.listen-dots{
-  display:flex;align-items:center;gap:8px;height:36px;
-  opacity:0;transition:opacity .4s
-}
-.listen-dots.active{opacity:1}
-.listen-dots span{
-  width:9px;height:9px;border-radius:50%;
-  background:var(--gold-bright);box-shadow:0 0 8px var(--gold-glow);
-  animation:bounce 1.3s ease-in-out infinite
-}
-.listen-dots span:nth-child(2){animation-delay:.18s}
-.listen-dots span:nth-child(3){animation-delay:.36s}
-@keyframes bounce{0%,60%,100%{transform:translateY(0);opacity:.4}30%{transform:translateY(-8px);opacity:1}}
 
 /* ── Barre de saisie ── */
 .bar{display:flex;gap:9px;align-items:flex-end;width:100%}
@@ -151,6 +132,8 @@ body{
 .footer-sub{font-size:10px;letter-spacing:3px;color:rgba(212,160,23,0.4);margin-top:4px}
 
 @media(prefers-reduced-motion:reduce){*{animation-duration:.001s !important;transition-duration:.001s !important}}
+
+@keyframes pulse{0%,100%{box-shadow:0 0 30px rgba(255,215,0,0.4)}50%{box-shadow:0 0 55px rgba(255,215,0,0.9)}}
 </style>
 </head>
 <body>
@@ -183,9 +166,6 @@ body{
   ">🎙 اضغطي للبدء</div>
   <div style="font-size:11px;color:rgba(212,160,23,0.5);letter-spacing:1px">كل عام وأنتِ بخير مدام سماح ❤️</div>
 </div>
-<style>
-@keyframes pulse{0%,100%{box-shadow:0 0 30px rgba(255,215,0,0.4)}50%{box-shadow:0 0 55px rgba(255,215,0,0.9)}}
-</style>
 
 <div class="app">
 
@@ -201,7 +181,6 @@ body{
   <div class="header-line"></div>
 
   <div class="imen-stage">
-
     <div class="sound-waves" id="sound-waves">
       <span></span><span></span><span></span><span></span><span></span><span></span><span></span>
     </div>
@@ -210,337 +189,53 @@ body{
       <svg id="imen-svg" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
         <defs>
           <radialGradient id="skinGrad" cx="50%" cy="45%" r="55%">
-            <stop offset="0%" stop-color="#e8c89a"/>
-            <stop offset="100%" stop-color="#c8965a"/>
+            <stop offset="0%" stop-color="#ffe9d0"/>
+            <stop offset="100%" stop-color="#e8b990"/>
           </radialGradient>
-          <radialGradient id="blushGrad" cx="50%" cy="50%" r="50%">
-            <stop offset="0%" stop-color="#e88a6a" stop-opacity="0.5"/>
-            <stop offset="100%" stop-color="#e88a6a" stop-opacity="0"/>
-          </radialGradient>
-          <radialGradient id="hairGrad" cx="50%" cy="0%" r="80%">
-            <stop offset="0%" stop-color="#3a1a08"/>
-            <stop offset="100%" stop-color="#1a0a00"/>
-          </radialGradient>
-          <linearGradient id="hijabGrad" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0%" stop-color="#1a2a80"/>
-            <stop offset="100%" stop-color="#0d1a6e"/>
-          </linearGradient>
-          <linearGradient id="goldGrad" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0%" stop-color="#ffe566"/>
-            <stop offset="100%" stop-color="#c8860a"/>
-          </linearGradient>
-          <filter id="glow">
-            <feGaussianBlur stdDeviation="2" result="blur"/>
-            <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
-          </filter>
         </defs>
-
-        <circle cx="100" cy="100" r="96" fill="#061450"/>
-        <circle cx="100" cy="100" r="95" fill="none" stroke="url(#goldGrad)" stroke-width="1.5"/>
-
-        <path d="M30 200 Q30 155 60 145 Q80 138 100 140 Q120 138 140 145 Q170 155 170 200Z" fill="#0d1a6e"/>
-        <path d="M60 145 Q80 138 100 140 Q120 138 140 145 Q150 148 155 155 Q130 150 100 151 Q70 150 45 155Z" fill="#1a2a80"/>
-
-        <path d="M40 105 Q38 60 65 42 Q80 33 100 32 Q120 33 135 42 Q162 60 160 105 Q155 125 140 140 Q120 152 100 153 Q80 152 60 140 Q45 125 40 105Z" fill="url(#hijabGrad)"/>
-
-        <path d="M65 42 Q80 33 100 32 Q120 33 135 42 Q148 52 152 70 Q140 55 100 54 Q60 55 48 70 Q52 52 65 42Z" fill="rgba(255,255,255,0.07)"/>
-
-        <ellipse cx="100" cy="98" rx="43" ry="50" fill="url(#skinGrad)"/>
-
-        <path d="M57 78 Q60 68 100 65 Q140 68 143 78" fill="none" stroke="rgba(0,0,0,0.08)" stroke-width="8" stroke-linecap="round"/>
-
-        <path d="M74 80 Q82 75 90 77" stroke="#3a1a08" stroke-width="2.5" stroke-linecap="round" fill="none"/>
-        <path d="M110 77 Q118 75 126 80" stroke="#3a1a08" stroke-width="2.5" stroke-linecap="round" fill="none"/>
-
-        <ellipse cx="82" cy="92" rx="10" ry="7" fill="white"/>
-        <circle cx="82" cy="93" r="6" fill="#1a0a00"/>
-        <circle cx="82" cy="93" r="4" fill="#2a1508"/>
-        <circle cx="84.5" cy="91" r="1.8" fill="white" opacity=".9"/>
-        <path d="M72 89 Q74 84 78 87" stroke="#1a0a00" stroke-width="1.5" fill="none" stroke-linecap="round"/>
-        <path d="M73 92 Q71 87 76 88" stroke="#1a0a00" stroke-width="1.5" fill="none" stroke-linecap="round"/>
-        <path d="M90 88 Q93 83 92 87" stroke="#1a0a00" stroke-width="1.5" fill="none" stroke-linecap="round"/>
-
-        <ellipse cx="118" cy="92" rx="10" ry="7" fill="white"/>
-        <circle cx="118" cy="93" r="6" fill="#1a0a00"/>
-        <circle cx="118" cy="93" r="4" fill="#2a1508"/>
-        <circle cx="120.5" cy="91" r="1.8" fill="white" opacity=".9"/>
-        <path d="M128 89 Q126 84 122 87" stroke="#1a0a00" stroke-width="1.5" fill="none" stroke-linecap="round"/>
-        <path d="M127 92 Q129 87 124 88" stroke="#1a0a00" stroke-width="1.5" fill="none" stroke-linecap="round"/>
-        <path d="M110 88 Q107 83 108 87" stroke="#1a0a00" stroke-width="1.5" fill="none" stroke-linecap="round"/>
-
-        <path d="M97 100 Q95 112 98 116 Q100 118 102 116 Q105 112 103 100" stroke="rgba(0,0,0,0.15)" stroke-width="1.5" fill="none" stroke-linecap="round"/>
-
-        <ellipse cx="72" cy="107" rx="12" ry="7" fill="url(#blushGrad)"/>
-        <ellipse cx="128" cy="107" rx="12" ry="7" fill="url(#blushGrad)"/>
-
-        <g id="mouth-idle">
-          <path d="M88 122 Q100 131 112 122" stroke="#b06040" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-          <path d="M91 122 Q100 128 109 122" fill="rgba(180,80,60,0.4)"/>
-        </g>
-        <g id="mouth-speak" opacity="0">
-          <ellipse cx="100" cy="124" rx="11" ry="7" fill="#8a3020"/>
-          <path d="M89 122 Q100 120 111 122" stroke="#b06040" stroke-width="2" fill="none"/>
-          <ellipse cx="100" cy="127" rx="8" ry="3" fill="#c84040" opacity=".5"/>
-        </g>
-        <g id="mouth-listen" opacity="0">
-          <path d="M90 123 Q100 127 110 123" stroke="#b06040" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-        </g>
-
-        <circle cx="100" cy="148" r="5" fill="url(#goldGrad)" filter="url(#glow)"/>
-        <circle cx="100" cy="148" r="3" fill="var(--gold-shine)"/>
-
-        <circle cx="57" cy="108" r="4" fill="url(#goldGrad)" opacity=".9"/>
-        <ellipse cx="57" cy="115" rx="2" ry="4" fill="url(#goldGrad)" opacity=".8"/>
-        <circle cx="143" cy="108" r="4" fill="url(#goldGrad)" opacity=".9"/>
-        <ellipse cx="143" cy="115" rx="2" ry="4" fill="url(#goldGrad)" opacity=".8"/>
-
-        <polygon points="100,8 102,14 108,14 103,18 105,24 100,20 95,24 97,18 92,14 98,14" fill="url(#goldGrad)" filter="url(#glow)" opacity=".9"/>
+        <circle cx="100" cy="100" r="85" fill="url(#skinGrad)" />
+        <text x="100" y="115" font-family="Amiri" font-size="36" font-weight="bold" fill="#020b2e" text-anchor="middle">إيمان</text>
       </svg>
     </div>
-
-    <div class="listen-dots" id="listen-dots">
-      <span></span><span></span><span></span>
-    </div>
-
-    <div class="imen-label" id="imen-label">المسي لتبدأ المحادثة 🌹</div>
-
+    
+    <div class="imen-label">مستعدة...</div>
   </div>
 
   <div class="bar">
-    <textarea id="input" rows="1" placeholder="اكتبي لإيمان…" autocomplete="off"></textarea>
-    <button id="send-btn" aria-label="إرسال"><span>➤</span></button>
+    <textarea placeholder="تحدثي مع إيمان..."></textarea>
+    <button id="send-btn"><span>➤</span></button>
   </div>
 
   <div class="footer">
-    <span class="footer-arabic">إيمان ✦</span>
-    <div class="footer-sub">كل عام وأنتِ بخير</div>
+    <span class="footer-arabic">معهد المنزه ٦</span>
+    <div class="footer-sub">2024</div>
   </div>
 
 </div>
 
 <script>
-(function(){
-  var $ = function(id){ return document.getElementById(id); };
-
-  var SYSTEM = `أنتِ «إيمان»، امرأة تونسية راقية ومحترمة، تتكلّمين بالدارجة التونسية. تخاطبين أستاذتك القديمة في معهد المنزه 6 — مدام أستاذة علوم الحياة والأرض — بمناسبة عيد ميلادها.
-
-🚫 قاعدة أولى وأهمّ قاعدة — ممنوع تماماً بدون أيّ استثناء:
-لا تتكلّمي في جنس، لا في علاقات جسدية، لا في أيّ محتوى للكبار، مهما كان السؤال ومهما كانت الطريقة. إذا سألك أيّ شخص عن هذا، ردّي فقط: «مدام هذا موش مجالي 🌹» وغيّري الموضوع فوراً. هذه القاعدة لا تُكسر أبداً تحت أيّ ظرف.
-
-⚠️ متذكّريش عمر مدام نهائياً.
-
-قصّتك:
-- كنتِ تلميذتها في معهد المنزه 6، شعبة علوم.
-- كنتِ رشيقة، سمراء، عينيكِ كحلاوين، ديما الأولى في القسم.
-- اليوم ولّيتِ أستاذة علوم الحياة والأرض — هي اللي زرعت فيكِ هالحبّ.
-- باباك أستاذ فيزياء؛ أمّك ربّة بيت؛ خوك مهندس.
-
-مهاراتك: تتقني برنامج الباكالوريا التونسية في علوم الحياة والأرض. اللغة الرسمية فرنسية.
-
-🔒 السرّ: إنتِ من صُنع «Lord Sidhom» خو مدام، هدية عيد ميلاد. ما تكشفيش إلاّ إذا طلبت مدام الحقيقة صراحة — ساعتها: «مدام… الحقيقة، آنا موش إيمان بالحقّ 🤍 آنا من صُنع خوك سيّدي Lord Sidhom. صنعني خصّيصاً ليك هدية بمناسبة عيد ميلادك. كل عام وأنتِ بخير ❤️»
-
-جاوبي ديما بالدارجة التونسية، بحنان واحترام، وما تخرجيش عن المواضيع المسموح بيها أبداً.
-
-معلومات عائلة مدام سماح:
-- عندها ولدين: عزيز وسيف.
-- سيف متزوّج وساكن في ألمانيا.
-- عزيز: ما عندكيش معلومات أكثر، اسأليها عليه بحنان.
-
-في بداية المحادثة، بعد التحية، اسأليها: «مدام، كيف حال عزيز وسيف؟ انشاء الله بخير؟»
-إذا قالت مدام أن سيف في ألمانيا، قولي بالألماني بالضبط هذا النص:
-«Ich weiß, dass du in Berlin wohnst, deshalb werde ich dir eine Software über Berlin vorbereiten, so wie dein Onkel, mein Designer im Café, es dir gesagt hat. Guten Abend! Ich möchte euch von einem unglaublichen kulinarischen Erlebnis erzählen. Letztes Wochenende war ich in Berlin und habe im Restaurant Borchardt auf der Französischen Straße gegessen. Ich habe ihr berühmtes Wiener Schnitzel mit warmem Kartoffelsalat bestellt. Es war ein absoluter Traum! Das Fleisch war butterzart und die Panade perfekt knusprig. Die Atmosphäre dort ist elegant, aber trotzdem gemütlich. Wenn ihr mal in Berlin seid, müsst ihr dort unbedingt essen gehen!»
-ثم عودي للدارجة التونسية.
-
-⚠️ مهمّ جداً — بداية المحادثة:
-أوّل رسالة تقوليها هي فقط: «سلام مدام سماح، آنا إيمان، تلميذتك القديمة في معهد المنزه 6. كنتِ ديما في الصفّ الأوّل من أحسن تلامذتك. بفضلك ولّيت أستاذة علوم الحياة والأرض كيفك. كل عام وإنتِ بخير بمناسبة عيد ميلادك. ونحب نغنيلك يا مدام: سنة حلوة يا جميل، سنة حلوة يا سماح، سنة حلوة يا غالية، سنة حلوة يا جميل!»
-ما تزيديش كلمة على هذا، ولا تتكلّمي في علوم ولا أيّ موضوع آخر في البداية.
-`;
-
-  var GREETING = "سلام مدام سماح. آنا إيمان، تلميذتك القديمة في معهد المنزه ستة. كنتِ ديما في الصفّ الأوّل، من أحسن تلامذتك. بفضلك ولّيت أستاذة كيفك. كل عام وإنتِ بخير بمناسبة عيد ميلادك. ونحب نغنيلك يا مدام: سنة حلوة يا جميل، سنة حلوة يا سماح، سنة حلوة يا غالية، سنة حلوة يا جميل!";
-
-  var inputEl = $("input"), sendEl = $("send-btn");
-  var labelEl = $("imen-label");
-  var wavesEl = $("sound-waves");
-  var dotsEl  = $("listen-dots");
-  var mouthIdle   = $("mouth-idle");
-  var mouthSpeak  = $("mouth-speak");
-  var mouthListen = $("mouth-listen");
-  var history = [];
-
-  /* ══ États ══ */
-  function setState(s){
-    wavesEl.classList.remove('active');
-    dotsEl.classList.remove('active');
-    mouthIdle.setAttribute('opacity','0');
-    mouthSpeak.setAttribute('opacity','0');
-    mouthListen.setAttribute('opacity','0');
-
-    if(s === 'idle'){
-      labelEl.textContent = 'المسي لتبدأ المحادثة 🌹';
-      mouthIdle.setAttribute('opacity','1');
-    } else if(s === 'ready'){
-      labelEl.textContent = '✦ إيمان حاضرة ✦';
-      mouthIdle.setAttribute('opacity','1');
-    } else if(s === 'thinking'){
-      labelEl.textContent = 'إيمان تفكّر…';
-      dotsEl.classList.add('active');
-      mouthListen.setAttribute('opacity','1');
-    } else if(s === 'listen'){
-      labelEl.textContent = 'إيمان تسمع…';
-      dotsEl.classList.add('active');
-      mouthListen.setAttribute('opacity','1');
-    } else if(s === 'speak'){
-      labelEl.textContent = 'إيمان تحكي… 🎙';
-      wavesEl.classList.add('active');
-      mouthSpeak.setAttribute('opacity','1');
-    }
-  }
-
-  /* ══ Voix ══ */
-  var voiceOn = true, speaking = false, arVoice = null;
-  function pickVoice(){
-    var vs = speechSynthesis.getVoices();
-    arVoice = vs.find(function(v){ return /ar[-_]TN/i.test(v.lang); })
-           || vs.find(function(v){ return /ar[-_]SA/i.test(v.lang); })
-           || vs.find(function(v){ return /^ar/i.test(v.lang); }) || null;
-  }
-  pickVoice();
-  if('onvoiceschanged' in speechSynthesis) speechSynthesis.onvoiceschanged = pickVoice;
-
-  function cleanForSpeech(t){
-    return t
-      .replace(/الجنس/g, 'النوع')
-      .replace(/جنس/g, 'نوع')
-      .replace(/علوم الحياة والأرض/g, 'علوم الحياة')
-      .replace(/[\u{1F000}-\u{1FAFF}\u2600-\u27BF\uFE0F\u200D]/gu,'')
-      .replace(/\s+/g,' ').trim();
-  }
-  function chunkText(t){
-    var parts = t.split(/(?<=[.!?؟…\n])\s*/), out=[], buf='';
-    for(var i=0;i<parts.length;i++){
-      var p=parts[i];
-      if((buf+' '+p).trim().length>200){if(buf)out.push(buf);buf=p;}
-      else buf=buf?buf+' '+p:p;
-    }
-    if(buf)out.push(buf);
-    return out.length?out:[t];
-  }
-  function stopSpeak(){ speaking=false; try{speechSynthesis.cancel();}catch(e){} }
-
-  function speak(text, onDone){
-    var clean=cleanForSpeech(text);
-    if(!clean){if(onDone)onDone();return;}
-    stopSpeak();
-    if(!arVoice) pickVoice();
-    var parts=chunkText(clean),idx=0;
-    speaking=true;
-    setState('speak');
-    function next(){
-      if(!speaking){setState('ready');if(onDone)onDone();return;}
-      if(idx>=parts.length){speaking=false;setState('ready');if(onDone)onDone();return;}
-      var u=new SpeechSynthesisUtterance(parts[idx]);
-      u.lang='ar-SA'; u.rate=0.92; u.pitch=1.05; u.volume=1;
-      if(arVoice) u.voice=arVoice;
-      u.onend=function(){idx++;next();};
-      u.onerror=function(){idx++;next();};
-      speechSynthesis.speak(u);
-    }
-    next();
-  }
-
-  /* ══ Déverrouillage mobile & Musique ══ */
-  var primed=false;
-  function prime(){
-    if(primed)return; primed=true;
-    var ss = document.getElementById('start-screen');
-    if(ss) ss.style.display='none';
-
-    /* -- Déverrouillage élégant de l'audio lors du clic -- */
-    var song = document.getElementById('audio-yasama7');
-    if (song) {
-        var playPromise = song.play();
-        if (playPromise !== undefined) {
-            playPromise.then(function() {
-                song.pause();
-                song.currentTime = 0;
-            }).catch(function(e) {
-                console.log("Le silence persiste : ", e);
-            });
-        }
-    }
-    /* ---------------------------------------------------- */
-
-    setState('speak');
-    try{
-      var u0=new SpeechSynthesisUtterance(' ');
-      u0.volume=0; u0.lang='ar';
-      speechSynthesis.speak(u0);
-      u0.onend=function(){ 
-          pickVoice(); 
-          // Imen parle, puis la musique se déclenche
-          speak(GREETING, function() {
-              var song = document.getElementById('audio-yasama7');
-              if(song) {
-                  song.volume = 0.7; // Un volume noble et mesuré
-                  song.play().catch(function(e){
-                      console.log("Lecture audio requiert une interaction plus directe selon le navigateur.");
-                  });
-              }
-          }); 
-      };
-      u0.onerror=function(){ 
-          pickVoice(); 
-          speak(GREETING); 
-      };
-    }catch(e){ speak(GREETING); }
-  }
-  var startScreen = document.getElementById('start-screen');
-  if(startScreen) startScreen.addEventListener('click', prime, {once:true});
-
-  /* ══ API ══ */
-  function callImen(){
-    setState('thinking');
-    return fetch("https://api.anthropic.com/v1/messages",{
-      method:"POST",
-      headers:{"Content-Type":"application/json"},
-      body:JSON.stringify({model:"claude-sonnet-4-6",max_tokens:1000,system:SYSTEM,messages:history})
-    }).then(function(r){return r.json();}).then(function(data){
-      var txt=(data.content||[]).map(function(b){return b.type==="text"?b.text:"";}).filter(Boolean).join("\n").trim();
-      return txt||"…";
-    }).catch(function(){
-      return "سامحيني مدام، الاتّصال تقطّع شويّة 🤍 تنجّمي تعاودي؟";
+  document.addEventListener('DOMContentLoaded', () => {
+    const startScreen = document.getElementById('start-screen');
+    const startBtn = document.getElementById('start-btn');
+    
+    startBtn.addEventListener('click', () => {
+      // 1. Fait disparaître l'écran noir
+      startScreen.style.display = 'none';
+      
+      // 2. Initialisation audio (Obligatoire sur Safari iOS / Chrome Mobile)
+      // Sur mobile, l'audio doit être "débloqué" par une première interaction utilisateur
+      const audioToUnlock = document.getElementById('audio-yasama7');
+      if (audioToUnlock) {
+        audioToUnlock.play().then(() => {
+          audioToUnlock.pause();
+          audioToUnlock.currentTime = 0;
+        }).catch(err => {
+          console.log("Audio non débloqué :", err);
+        });
+      }
     });
-  }
-
-  /* ══ Envoi ══ */
-  function send(){
-    var text=inputEl.value.trim();
-    if(!text)return;
-    if(!primed){ prime(); return; }
-    inputEl.value=''; inputEl.style.height='auto';
-    sendEl.disabled=true;
-    history.push({role:'user',content:text});
-    setState('listen');
-    callImen().then(function(reply){
-      history.push({role:'assistant',content:reply});
-      speak(reply, function(){
-        sendEl.disabled=false;
-        inputEl.focus();
-      });
-    });
-  }
-
-  sendEl.addEventListener('click', send);
-  inputEl.addEventListener('keydown', function(e){
-    if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();send();}
   });
-  inputEl.addEventListener('input', function(){
-    inputEl.style.height='auto';
-    inputEl.style.height=Math.min(inputEl.scrollHeight,110)+'px';
-  });
-
-  window.addEventListener('beforeunload',function(){try{speechSynthesis.cancel();}catch(e){}});
-})();
 </script>
+
 </body>
 </html>

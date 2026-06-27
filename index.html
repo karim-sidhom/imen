@@ -160,7 +160,6 @@ body{
 <div class="bg-overlay"></div>
 <div class="bg-pattern"></div>
 
-<!-- Écran de démarrage -->
 <div id="start-screen" style="
   position:fixed;inset:0;z-index:999;
   background:rgba(2,9,40,0.97);
@@ -186,7 +185,6 @@ body{
 
 <div class="app">
 
-  <!-- Bismillah -->
   <div class="quran-banner">
     <span class="bismillah">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</span>
     <div class="quran-line-divider"></div>
@@ -194,20 +192,16 @@ body{
     <div class="quran-ref">سورة طه — الآية ١١٤</div>
   </div>
 
-  <!-- Titre -->
   <div class="app-title">إيمان</div>
   <div class="app-sub">أستاذة علوم الحياة والأرض · معهد المنزه ٦</div>
   <div class="header-line"></div>
 
-  <!-- Illustration Imen -->
   <div class="imen-stage">
 
-    <!-- Ondes "elle parle" -->
     <div class="sound-waves" id="sound-waves">
       <span></span><span></span><span></span><span></span><span></span><span></span><span></span>
     </div>
 
-    <!-- Visage -->
     <div class="imen-halo">
       <svg id="imen-svg" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
         <defs>
@@ -237,101 +231,77 @@ body{
           </filter>
         </defs>
 
-        <!-- Fond cercle -->
         <circle cx="100" cy="100" r="96" fill="#061450"/>
         <circle cx="100" cy="100" r="95" fill="none" stroke="url(#goldGrad)" stroke-width="1.5"/>
 
-        <!-- Corps / épaules -->
         <path d="M30 200 Q30 155 60 145 Q80 138 100 140 Q120 138 140 145 Q170 155 170 200Z" fill="#0d1a6e"/>
         <path d="M60 145 Q80 138 100 140 Q120 138 140 145 Q150 148 155 155 Q130 150 100 151 Q70 150 45 155Z" fill="#1a2a80"/>
 
-        <!-- Hijab fond -->
         <path d="M40 105 Q38 60 65 42 Q80 33 100 32 Q120 33 135 42 Q162 60 160 105 Q155 125 140 140 Q120 152 100 153 Q80 152 60 140 Q45 125 40 105Z" fill="url(#hijabGrad)"/>
 
-        <!-- Hijab reflet -->
         <path d="M65 42 Q80 33 100 32 Q120 33 135 42 Q148 52 152 70 Q140 55 100 54 Q60 55 48 70 Q52 52 65 42Z" fill="rgba(255,255,255,0.07)"/>
 
-        <!-- Visage peau -->
         <ellipse cx="100" cy="98" rx="43" ry="50" fill="url(#skinGrad)"/>
 
-        <!-- Ombre sous hijab sur visage -->
         <path d="M57 78 Q60 68 100 65 Q140 68 143 78" fill="none" stroke="rgba(0,0,0,0.08)" stroke-width="8" stroke-linecap="round"/>
 
-        <!-- Sourcils -->
         <path d="M74 80 Q82 75 90 77" stroke="#3a1a08" stroke-width="2.5" stroke-linecap="round" fill="none"/>
         <path d="M110 77 Q118 75 126 80" stroke="#3a1a08" stroke-width="2.5" stroke-linecap="round" fill="none"/>
 
-        <!-- Yeux -->
-        <!-- œil gauche (droit en rtl) -->
         <ellipse cx="82" cy="92" rx="10" ry="7" fill="white"/>
         <circle cx="82" cy="93" r="6" fill="#1a0a00"/>
         <circle cx="82" cy="93" r="4" fill="#2a1508"/>
         <circle cx="84.5" cy="91" r="1.8" fill="white" opacity=".9"/>
-        <!-- cils gauche -->
         <path d="M72 89 Q74 84 78 87" stroke="#1a0a00" stroke-width="1.5" fill="none" stroke-linecap="round"/>
         <path d="M73 92 Q71 87 76 88" stroke="#1a0a00" stroke-width="1.5" fill="none" stroke-linecap="round"/>
         <path d="M90 88 Q93 83 92 87" stroke="#1a0a00" stroke-width="1.5" fill="none" stroke-linecap="round"/>
 
-        <!-- œil droit -->
         <ellipse cx="118" cy="92" rx="10" ry="7" fill="white"/>
         <circle cx="118" cy="93" r="6" fill="#1a0a00"/>
         <circle cx="118" cy="93" r="4" fill="#2a1508"/>
         <circle cx="120.5" cy="91" r="1.8" fill="white" opacity=".9"/>
-        <!-- cils droit -->
         <path d="M128 89 Q126 84 122 87" stroke="#1a0a00" stroke-width="1.5" fill="none" stroke-linecap="round"/>
         <path d="M127 92 Q129 87 124 88" stroke="#1a0a00" stroke-width="1.5" fill="none" stroke-linecap="round"/>
         <path d="M110 88 Q107 83 108 87" stroke="#1a0a00" stroke-width="1.5" fill="none" stroke-linecap="round"/>
 
-        <!-- Nez -->
         <path d="M97 100 Q95 112 98 116 Q100 118 102 116 Q105 112 103 100" stroke="rgba(0,0,0,0.15)" stroke-width="1.5" fill="none" stroke-linecap="round"/>
 
-        <!-- Blush -->
         <ellipse cx="72" cy="107" rx="12" ry="7" fill="url(#blushGrad)"/>
         <ellipse cx="128" cy="107" rx="12" ry="7" fill="url(#blushGrad)"/>
 
-        <!-- Bouche - état NEUTRE (sourire doux) -->
         <g id="mouth-idle">
           <path d="M88 122 Q100 131 112 122" stroke="#b06040" stroke-width="2.5" fill="none" stroke-linecap="round"/>
           <path d="M91 122 Q100 128 109 122" fill="rgba(180,80,60,0.4)"/>
         </g>
-        <!-- Bouche - état PARLE (bouche légèrement ouverte) -->
         <g id="mouth-speak" opacity="0">
           <ellipse cx="100" cy="124" rx="11" ry="7" fill="#8a3020"/>
           <path d="M89 122 Q100 120 111 122" stroke="#b06040" stroke-width="2" fill="none"/>
           <ellipse cx="100" cy="127" rx="8" ry="3" fill="#c84040" opacity=".5"/>
         </g>
-        <!-- Bouche - état ÉCOUTE (légère attention) -->
         <g id="mouth-listen" opacity="0">
           <path d="M90 123 Q100 127 110 123" stroke="#b06040" stroke-width="2.5" fill="none" stroke-linecap="round"/>
         </g>
 
-        <!-- Bijou hijab (broche dorée) -->
         <circle cx="100" cy="148" r="5" fill="url(#goldGrad)" filter="url(#glow)"/>
         <circle cx="100" cy="148" r="3" fill="var(--gold-shine)"/>
 
-        <!-- Boucle d'oreille gauche -->
         <circle cx="57" cy="108" r="4" fill="url(#goldGrad)" opacity=".9"/>
         <ellipse cx="57" cy="115" rx="2" ry="4" fill="url(#goldGrad)" opacity=".8"/>
-        <!-- Boucle d'oreille droite -->
         <circle cx="143" cy="108" r="4" fill="url(#goldGrad)" opacity=".9"/>
         <ellipse cx="143" cy="115" rx="2" ry="4" fill="url(#goldGrad)" opacity=".8"/>
 
-        <!-- Étoile décorative -->
         <polygon points="100,8 102,14 108,14 103,18 105,24 100,20 95,24 97,18 92,14 98,14" fill="url(#goldGrad)" filter="url(#glow)" opacity=".9"/>
       </svg>
     </div>
 
-    <!-- Points "elle écoute" -->
     <div class="listen-dots" id="listen-dots">
       <span></span><span></span><span></span>
     </div>
 
-    <!-- Label texte état -->
     <div class="imen-label" id="imen-label">المسي لتبدأ المحادثة 🌹</div>
 
   </div>
 
-  <!-- Barre de saisie -->
   <div class="bar">
     <textarea id="input" rows="1" placeholder="اكتبي لإيمان…" autocomplete="off"></textarea>
     <button id="send-btn" aria-label="إرسال"><span>➤</span></button>
@@ -475,7 +445,7 @@ body{
     next();
   }
 
-  /* ══ Déverrouillage mobile ══ */
+  /* ══ Déverrouillage mobile et Lancement ══ */
   var primed=false;
   function prime(){
     if(primed)return; primed=true;
@@ -483,14 +453,29 @@ body{
     var ss = document.getElementById('start-screen');
     if(ss) ss.style.display='none';
     setState('speak');
+
+    // Fonction qui sera appelée EXACTEMENT à la fin du premier discours
+    var playSong = function() {
+      // Remplace le chemin ci-dessous par l'URL ou le chemin exact de ta chanson
+      var audio = new Audio('chanson_3.mp3');
+      audio.play().catch(function(error) {
+        console.log("La lecture audio a été bloquée par le navigateur : ", error);
+      });
+    };
+
     try{
       var u0=new SpeechSynthesisUtterance(' ');
       u0.volume=0; u0.lang='ar';
       speechSynthesis.speak(u0);
-      u0.onend=function(){ pickVoice(); speak(GREETING); };
-      u0.onerror=function(){ pickVoice(); speak(GREETING); };
-    }catch(e){ speak(GREETING); }
+
+      // On passe 'playSong' comme callback à la fonction speak
+      u0.onend=function(){ pickVoice(); speak(GREETING, playSong); };
+      u0.onerror=function(){ pickVoice(); speak(GREETING, playSong); };
+    }catch(e){
+      speak(GREETING, playSong);
+    }
   }
+
   // Démarrage uniquement via le bouton
   var startScreen = document.getElementById('start-screen');
   if(startScreen) startScreen.addEventListener('click', prime, {once:true});

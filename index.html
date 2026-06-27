@@ -379,7 +379,7 @@ body{
 
 في بداية المحادثة، بعد التحية، اسأليها: «مدام، كيف حال عزيز وسيف؟ انشاء الله بخير؟»
 إذا قالت مدام أن سيف في ألمانيا، قولي بالألماني بالضبط هذا النص:
-«Ich weiß, dass du in Berlin wohnst, deshalb werde ich dir eine Software über Berlin vorbereiten, so wie dein Onkel, mein Designer im Café, es dir gesagt hat. Guten Abend! Ich möchte euch von einem unglaculichen kulinarischen Erlebnis erzählen. Letztes Wochenende war ich in Berlin und habe im Restaurant Borchardt auf der Französischen Straße gegessen. Ich habe ihr berühmtes Wiener Schnitzel mit warmem Kartoffelsalat bestellt. Es war ein absoluter Traum! Das Fleisch war butterzart und die Panade perfekt knusprig. Die Atmosphäre dort ist elegant, aber trotzdem gemütlich. Wenn ihr mal in Berlin seid, müsst ihr dort unbedingt essen gehen!»
+«Ich weiß, dass du in Berlin wohnst, deshalb werde ich dir eine Software über Berlin vorbereiten, so wie dein Onkel, mein Designer im Café, es dir gesagt hat. Guten Abend! Ich möchte euch von einem unglaublichen kulinarischen Erlebnis erzählen. Letztes Wochenende war ich in Berlin und habe im Restaurant Borchardt auf der Französischen Straße gegessen. Ich habe ihr berühmtes Wiener Schnitzel mit warmem Kartoffelsalat bestellt. Es war ein absoluter Traum! Das Fleisch war butterzart und die Panade perfekt knusprig. Die Atmosphäre dort ist elegant, aber trotzdem gemütlich. Wenn ihr mal in Berlin seid, müsst ihr dort unbedingt essen gehen!»
 ثم عودي للدارجة التونسية.
 
 ⚠️ مهمّ جداً — بداية المحادثة:
@@ -479,32 +479,8 @@ body{
     next();
   }
 
-  /* ══ Déverrouillage mobile & Musique en continu ══ */
+  /* ══ Déverrouillage mobile & Musique ══ */
   var primed=false;
-  
-  // La prestigieuse liste de lecture
-  var playlist = ['audio-yasama7', 'audio-samah1', 'audio-samah'];
-  var currentTrack = 0;
-
-  function playNextTrack() {
-      if (currentTrack < playlist.length) {
-          var song = document.getElementById(playlist[currentTrack]);
-          if (song) {
-              song.volume = 0.7; // Un volume noble et mesuré
-              
-              // Quand cette chanson se termine, on lance la suivante
-              song.onended = function() {
-                  currentTrack++;
-                  playNextTrack();
-              };
-              
-              song.play().catch(function(e){
-                  console.log("La lecture audio requiert une interaction plus directe selon le navigateur.");
-              });
-          }
-      }
-  }
-
   function prime(){
     if(primed)return; primed=true;
     var ss = document.getElementById('start-screen');
@@ -516,10 +492,15 @@ body{
       speechSynthesis.speak(u0);
       u0.onend=function(){ 
           pickVoice(); 
-          // Imen parle, puis la musique se déclenche en continu
+          // Imen parle, puis la musique se déclenche
           speak(GREETING, function() {
-              currentTrack = 0;
-              playNextTrack();
+              var song = document.getElementById('audio-yasama7');
+              if(song) {
+                  song.volume = 0.7; // Un volume noble et mesuré
+                  song.play().catch(function(e){
+                      console.log("Lecture audio requiert une interaction plus directe selon le navigateur.");
+                  });
+              }
           }); 
       };
       u0.onerror=function(){ 
@@ -528,7 +509,6 @@ body{
       };
     }catch(e){ speak(GREETING); }
   }
-  
   var startScreen = document.getElementById('start-screen');
   if(startScreen) startScreen.addEventListener('click', prime, {once:true});
 

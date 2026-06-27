@@ -160,6 +160,11 @@ body{
 <div class="bg-overlay"></div>
 <div class="bg-pattern"></div>
 
+<!-- Fichiers Audio -->
+<audio id="audio-yasama7" src="يا سماح.mp3"></audio>
+<audio id="audio-samah1" src="Samah Sidhom (1).mp3"></audio>
+<audio id="audio-samah" src="Samah Sidhom.mp3"></audio>
+
 <!-- Écran de démarrage -->
 <div id="start-screen" style="
   position:fixed;inset:0;z-index:999;
@@ -378,11 +383,11 @@ body{
 ثم عودي للدارجة التونسية.
 
 ⚠️ مهمّ جداً — بداية المحادثة:
-أوّل رسالة تقوليها هي فقط: «سلام مدام سماح، آنا إيمان، تلميذتك القديمة في معهد المنزه 6. كنتِ ديما في الصفّ الأوّل من أحسن تلامذتك. بفضلك ولّيت أستاذة علوم الحياة والأرض كيفك. كل عام وإنتِ بخير بمناسبة عيد ميلادك.»
+أوّل رسالة تقوليها هي فقط: «سلام مدام سماح، آنا إيمان، تلميذتك القديمة في معهد المنزه 6. كنتِ ديما في الصفّ الأوّل من أحسن تلامذتك. بفضلك ولّيت أستاذة علوم الحياة والأرض كيفك. كل عام وإنتِ بخير بمناسبة عيد ميلادك. ونحب نغنيلك يا مدام: سنة حلوة يا جميل، سنة حلوة يا سماح، سنة حلوة يا غالية، سنة حلوة يا جميل!»
 ما تزيديش كلمة على هذا، ولا تتكلّمي في علوم ولا أيّ موضوع آخر في البداية.
 `;
 
-  var GREETING = "سلام مدام سماح. آنا إيمان، تلميذتك القديمة في معهد المنزه ستة. كنتِ ديما في الصفّ الأوّل، من أحسن تلامذتك. بفضلك ولّيت أستاذة كيفك. كل عام وإنتِ بخير بمناسبة عيد ميلادك.";
+  var GREETING = "سلام مدام سماح. آنا إيمان، تلميذتك القديمة في معهد المنزه ستة. كنتِ ديما في الصفّ الأوّل، من أحسن تلامذتك. بفضلك ولّيت أستاذة كيفك. كل عام وإنتِ بخير بمناسبة عيد ميلادك. ونحب نغنيلك يا مدام: سنة حلوة يا جميل، سنة حلوة يا سماح، سنة حلوة يا غالية، سنة حلوة يا جميل!";
 
   var inputEl = $("input"), sendEl = $("send-btn");
   var labelEl = $("imen-label");
@@ -395,7 +400,6 @@ body{
 
   /* ══ États ══ */
   function setState(s){
-    // reset
     wavesEl.classList.remove('active');
     dotsEl.classList.remove('active');
     mouthIdle.setAttribute('opacity','0');
@@ -475,11 +479,10 @@ body{
     next();
   }
 
-  /* ══ Déverrouillage mobile ══ */
+  /* ══ Déverrouillage mobile & Musique ══ */
   var primed=false;
   function prime(){
     if(primed)return; primed=true;
-    // Cacher l'écran de démarrage
     var ss = document.getElementById('start-screen');
     if(ss) ss.style.display='none';
     setState('speak');
@@ -487,11 +490,25 @@ body{
       var u0=new SpeechSynthesisUtterance(' ');
       u0.volume=0; u0.lang='ar';
       speechSynthesis.speak(u0);
-      u0.onend=function(){ pickVoice(); speak(GREETING); };
-      u0.onerror=function(){ pickVoice(); speak(GREETING); };
+      u0.onend=function(){ 
+          pickVoice(); 
+          // Imen parle, puis la musique se déclenche
+          speak(GREETING, function() {
+              var song = document.getElementById('audio-yasama7');
+              if(song) {
+                  song.volume = 0.7; // Un volume noble et mesuré
+                  song.play().catch(function(e){
+                      console.log("Lecture audio requiert une interaction plus directe selon le navigateur.");
+                  });
+              }
+          }); 
+      };
+      u0.onerror=function(){ 
+          pickVoice(); 
+          speak(GREETING); 
+      };
     }catch(e){ speak(GREETING); }
   }
-  // Démarrage uniquement via le bouton
   var startScreen = document.getElementById('start-screen');
   if(startScreen) startScreen.addEventListener('click', prime, {once:true});
 
